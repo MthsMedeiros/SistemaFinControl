@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./src/output.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+  <title>Despesas</title>
+</head>
+
+<body class="flex justify-center font-['Inter']">
+  <!-- Container principal: envolve todo o conteúdo da página -->
+  <div class="border-2 w-full">
+    <!-- Cabeçalho: barra azul com título e bloco do usuário -->
+    <header class="bg-[#2d61a4]">
+      <!-- Linha do header: título (esquerda) e usuário (direita) -->
+      <div class="p-6 pl-10 text-3xl flex justify-between">
+        <!-- Título da página -->
+        <h1 class="text-white mt-3">Despesas</h1>
+        <!-- Bloco do usuário: imagem e nome -->
+        <div class="flex">
+          <img src="./img/images.jpg" alt="imgUser" class="w-16 h-16 rounded-full" />
+          <h1 class="text-white mt-3 ml-5">Matheus Medeiros</h1>
+        </div>
+      </div>
+    </header>
+
+    <!-- Área principal: fundo claro que centraliza o cartão do formulário -->
+    <main class="bg-[#e5e7ed] h-screen flex flex-col justify-start items-center gap-4 pt-30">
+      <!-- Cartão central: contém o formulário de cadastro -->
+      <div class="w-150 bg-white border rounded-xl">
+        <!-- Formulário de cadastro de despesa -->
+        <form action="submit">
+          <!-- Linha do campo Descrição: label + input -->
+          <div class="w-full flex border-b p-3 ">
+            <div class="mr-6 text-center">
+              <!-- Label da descrição -->
+              <label  for="inpDescReceita">Descrição</label>
+            </div>
+            <!-- Input: descrição da receita -->
+            <input type="text" maxlength="15" class="w-80 ml-5 bg-white border rounded-xs" placeholder="Digite a descrição da receita"
+              id="inpDescReceita" />
+          </div>
+
+          <!-- Linha do campo Valor: label + input -->
+          <div class="w-full flex border-b p-3 ">
+            <div class="mr-8 w-17 text-center">
+              <!-- Label do valor -->
+              <label  for="inpValorReceita">Valor</label>
+            </div>
+            <!-- Input: valor da receita (pode ser formatado com JS) -->
+            <input type="number" class="w-80 ml-5 bg-white border rounded-xs" placeholder="Digite o valor da receita" id="inpValorReceita" />
+          </div>
+
+          <!-- Linha do campo Data: label + input -->
+          <div class="w-full flex border-b p-3 ">
+            <div class="mr-8 w-17 text-center">
+              <!-- Label da data -->
+              <label  for="inpDataReceita">Data</label>
+            </div>
+            <!-- Input: data da receita -->
+            <input type="date" class="w-80 ml-5 bg-white border rounded-xs" placeholder="Digite a data da receita" id="inpDataReceita" />
+          </div>
+          
+          <div class=" mb-5 flex justify-center">
+            <button type="reset" onclick="clearfields()" class="bg-gray-500 text-white px-6 py-2 rounded-md mt-5 hover:scale-105">Limpar</button>
+            <!-- Botão de submit: centralizado e estilizado -->
+            <button type="button" onclick="createDespesa()" class="bg-[#2d61a4] text-white px-6 py-2 rounded-md mt-5 ml-5 hover:scale-105">Cadastrar</button>
+            
+          </div>
+        </form>
+      </div>
+
+      <div  class="w-150 bg-white border rounded-xl">
+        <table id="tableGrid" class="w-full">
+          <thead>
+            <tr>
+              <th class="border-b border-r p-2">Descrição</th>
+              <th class="border-b border-r p-2">Valor</th>
+              <th class="border-b border-r p-2">Data</th>
+              <th class="border-b p-2">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</body>
+<script src="./scripts/despesa.js"></script>
+
+</html>
