@@ -29,7 +29,7 @@
     </header>
 
     <!-- Área principal: fundo claro que centraliza o cartão do formulário -->
-    <main class="bg-[#e5e7ed] h-screen flex flex-col justify-start items-center gap-4 pt-30">
+    <main class="bg-[#e5e7ed] min-h-screen flex flex-col justify-start items-center gap-2 pt-2 pb-2">
       <!-- Cartão central: contém o formulário de cadastro -->
       <div class="w-150 bg-white border rounded-xl">
         <!-- Formulário de cadastro de receita -->
@@ -40,9 +40,12 @@
               <!-- Label da descrição -->
               <label  for="inpDescReceita">Descrição</label>
             </div>
-            <!-- Input: descrição da receita -->
-            <input type="text" maxlength="15" class="w-80 ml-5 bg-white border rounded-xs" placeholder="Digite a descrição da receita"
+            <div class="flex flex-col" id="divInptDesc">
+              <!-- Input: descrição da receita -->
+              <input type="text" maxlength="15" class="w-80 ml-5 bg-white border  rounded-xs" placeholder="Digite a descrição da receita"
               id="inpDescReceita" />
+
+            </div>
           </div>
 
           <!-- Linha do campo Valor: label + input -->
