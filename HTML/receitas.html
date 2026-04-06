@@ -4,10 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./src/output.css" />
+  <link rel="stylesheet" href="../src/output.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap"
+    rel="stylesheet">
   <title>Receitas</title>
 </head>
 
@@ -19,10 +21,20 @@
       <!-- Linha do header: título (esquerda) e usuário (direita) -->
       <div class="p-6 pl-10 text-3xl flex justify-between">
         <!-- Título da página -->
-        <h1 class="text-white mt-3">Receitas</h1>
+         <h1 class="text-white mt-3">Receitas</h1>
+        <div class="">
+          <nav id="MenuSuperior" class="">
+            <ul class="h-30 gap-5 flex justify-center items-center">
+              <li><a href="./index.html" class="text-white hover:text-gray-300 text-lg">Dashboard</a></li>
+              <li><a href="./receitas.html" class="text-white hover:text-gray-300 text-lg">Receitas</a></li>
+              <li><a href="./despesas.html" class="text-white hover:text-gray-300 text-lg">Despesas</a></li>
+            </ul>
+          </nav>
+        </div>
+        
         <!-- Bloco do usuário: imagem e nome -->
         <div class="flex">
-          <img src="./img/images.jpg" alt="imgUser" class="w-16 h-16 rounded-full" />
+          <img src="../img/images.jpg" alt="imgUser" class="w-16 h-16 rounded-full" />
           <h1 class="text-white mt-3 ml-5">Matheus Medeiros</h1>
         </div>
       </div>
@@ -38,12 +50,12 @@
           <div class="w-full flex border-b p-3 ">
             <div class="mr-6 text-center">
               <!-- Label da descrição -->
-              <label  for="inpDescReceita">Descrição</label>
+              <label for="inpDescReceita">Descrição</label>
             </div>
             <div class="flex flex-col" id="divInptDesc">
-            <!-- Input: descrição da receita -->
-              <input type="text" maxlength="15" class="w-80 ml-5 bg-white border  rounded-xs" placeholder="Digite a descrição da receita"
-              id="inpDescReceita" />
+              <!-- Input: descrição da receita -->
+              <input type="text" maxlength="15" class="w-80 ml-5 bg-white border  rounded-xs"
+                placeholder="Digite a descrição da receita" id="inpDescReceita" />
 
             </div>
           </div>
@@ -52,32 +64,36 @@
           <div class="w-full flex border-b p-3 ">
             <div class="mr-8 w-17 text-center">
               <!-- Label do valor -->
-              <label  for="inpValorReceita">Valor</label>
+              <label for="inpValorReceita">Valor</label>
             </div>
             <!-- Input: valor da receita (pode ser formatado com JS) -->
-            <input type="number" class="w-80 ml-5 bg-white border rounded-xs" placeholder="0,00 R$" id="inpValorReceita" />
+            <input type="number" class="w-80 ml-5 bg-white border rounded-xs" placeholder="0,00 R$"
+              id="inpValorReceita" />
           </div>
 
           <!-- Linha do campo Data: label + input -->
           <div class="w-full flex border-b p-3 ">
             <div class="mr-8 w-17 text-center">
               <!-- Label da data -->
-              <label  for="inpDataReceita">Data</label>
+              <label for="inpDataReceita">Data</label>
             </div>
             <!-- Input: data da receita -->
-            <input type="date" class="w-80 ml-5 bg-white border rounded-xs" placeholder="Digite a data da receita" id="inpDataReceita" />
+            <input type="date" class="w-80 ml-5 bg-white border rounded-xs" placeholder="Digite a data da receita"
+              id="inpDataReceita" />
           </div>
-          
+
           <div class=" mb-5 flex justify-center">
-            <button type="reset" onclick="clearfields()" class="bg-gray-500 text-white px-6 py-2 rounded-md mt-5 hover:scale-105">Limpar</button>
+            <button type="reset" onclick="clearfields()"
+              class="bg-gray-500 text-white px-6 py-2 rounded-md mt-5 hover:scale-105">Limpar</button>
             <!-- Botão de submit: centralizado e estilizado -->
-            <button type="button" onclick="createReceita()" class="bg-[#2d61a4] text-white px-6 py-2 rounded-md mt-5 ml-5 hover:scale-105">Cadastrar</button>
-            
+            <button type="button" onclick="createReceita()"
+              class="bg-[#2d61a4] text-white px-6 py-2 rounded-md mt-5 ml-5 hover:scale-105">Cadastrar</button>
+
           </div>
         </form>
       </div>
 
-      <div  class="w-150 bg-white border rounded-xl">
+      <div class="w-150 bg-white border rounded-xl">
         <table id="tableGrid" class="w-full">
           <thead>
             <tr>
@@ -94,6 +110,6 @@
     </main>
   </div>
 </body>
-<script src="./scripts/receita.js"></script>
+<script src="../scripts/receita.js"></script>
 
 </html>
