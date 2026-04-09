@@ -4,18 +4,61 @@ let categoriasDespesas = {}
 let listReceitas = JSON.parse(localStorage.getItem("receitas")) || [];  // Lista de receitas, obtida do localStorage ou inicializada como array vazio
 let categoriasReceitas = {}
 
-listDespesas.forEach((element) => {
-    categoriasDespesas[element.descricao] = (categoriasDespesas[element.descricao] || 0) + parseFloat(element.valor.replace(".", "").replace(",", "."));
-})
+let dtDashboard = document.getElementById("mesAnoInput");
 
-listReceitas.forEach((element) => {
-    categoriasReceitas[element.descricao] = (categoriasReceitas[element.descricao] || 0) + parseFloat(element.valor.replace(".", "").replace(",", "."));
-})
+let chartDespesas;
+let chartReceitas;
+let chartBalanco;
+
+
+
+// listDespesas.forEach((element) => {
+//     categoriasDespesas[element.descricao] = (categoriasDespesas[element.descricao] || 0) + parseFloat(element.valor.replace(".", "").replace(",", "."));
+// })
+
+// listReceitas.forEach((element) => {
+//     categoriasReceitas[element.descricao] = (categoriasReceitas[element.descricao] || 0) + parseFloat(element.valor.replace(".", "").replace(",", "."));
+// })
+
+function getCurrentMonthYear() {
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+
+    dtDashboard.value = `${now.getFullYear()}-${month}`;
+}
+
+function dataFilterDespesas(dtDashboard) {
+    categoriasDespesas = {};
+    let mesAnoFormat = dtDashboard.value.substring(5,7) + "/" + dtDashboard.value.substring(0,4);
+    listDespesas.forEach((element) => {
+        if(element.data.substring(3, 10) == mesAnoFormat){
+            categoriasDespesas[element.descricao] = (categoriasDespesas[element.descricao] || 0) + parseFloat(element.valor.replace(".", "").replace(",", "."));
+        }
+    })
+}
+
+function dataFilterReceitas(dtDashboard) {
+    categoriasReceitas = {};
+
+    let mesAnoFormat = dtDashboard.value.substring(5,7) + "/" + dtDashboard.value.substring(0,4);
+    listReceitas.forEach((element) => {
+        if(element.data.substring(3, 10) == mesAnoFormat){
+            categoriasReceitas[element.descricao] = (categoriasReceitas[element.descricao] || 0) + parseFloat(element.valor.replace(".", "").replace(",", "."));
+        }
+    })
+}
 
 function gerarGraficosDespesas() {
+    
+    
+    dataFilterDespesas(dtDashboard);
+    
 
     const ctx = document.getElementById('graficoDespesas').getContext('2d');
-    new Chart(ctx, {
+    if (chartDespesas) {
+        chartDespesas.destroy();
+    }
+    chartDespesas = new Chart(ctx, {
         type: 'doughnut',
         
         data: {
@@ -31,8 +74,13 @@ function gerarGraficosDespesas() {
 
 function gerarGraficosReceitas() {
 
+    dataFilterReceitas(dtDashboard);
+
     const ctx = document.getElementById('graficoReceitas').getContext('2d');
-    new Chart(ctx, {
+    if (chartReceitas) {
+        chartReceitas.destroy();
+    }
+    chartReceitas = new Chart(ctx, {
         type: 'doughnut',
         data: {
             labels: Object.keys(categoriasReceitas),
@@ -47,12 +95,23 @@ function gerarGraficosReceitas() {
 }
 
 function gerarGraficoBarras() {
+
+    dataFilterDespesas(dtDashboard);
+    dataFilterReceitas(dtDashboard);
+
+
     const ctx = document.getElementById('graficoBalanco').getContext('2d');
+    if (chartBalanco) {
+        chartBalanco.destroy();
+    }
     
     let sumDespesas = () => {
         let sum = 0;
         listDespesas.forEach((element) => {
-            sum += parseFloat(element.valor.replace(".", "").replace(",", "."));
+            if(element.data.substring(3, 10) == dtDashboard.value.substring(5,7) + "/" + dtDashboard.value.substring(0,4)){ 
+
+                sum += parseFloat(element.valor.replace(".", "").replace(",", "."));
+            }
         })
         return sum;
     }
@@ -60,12 +119,15 @@ function gerarGraficoBarras() {
     let sumReceitas = () => {
         let sum = 0;
         listReceitas.forEach((element) => {
-            sum += parseFloat(element.valor.replace(".", "").replace(",", "."));
+            if(element.data.substring(3, 10) == dtDashboard.value.substring(5,7) + "/" + dtDashboard.value.substring(0,4)){ 
+
+                sum += parseFloat(element.valor.replace(".", "").replace(",", "."));
+            }
         })
         return sum;
     }
 
-    new Chart(ctx, {
+    chartBalanco = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ["Despesas", "Receitas"],
@@ -96,7 +158,14 @@ function gerarGraficoBarras() {
 }
 
 addEventListener("DOMContentLoaded", () => {
+    getCurrentMonthYear();
     gerarGraficosDespesas();
     gerarGraficosReceitas();
     gerarGraficoBarras();
+
+    dtDashboard.addEventListener("change", () => {
+        gerarGraficosDespesas();
+        gerarGraficosReceitas();
+        gerarGraficoBarras();
+    })
 })
